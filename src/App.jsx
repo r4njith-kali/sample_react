@@ -7,8 +7,11 @@ function App() {
     borderRadius: '10px',
     display: 'inline-block',
     backgroundColor: 'white',
-    margin: '10px'
+    margin: '10px',
+    textAlign: 'center', // ✅ this
+    minWidth: '100px'     // optional for better shape
   };
+  
 
   const [nodeLabel, setNodeLabel] = useState('True');
 
@@ -19,18 +22,17 @@ function App() {
   };
 
   return (
-    <div className = "App">
+    <div className="App" style={{ border: '4px solid green' }}>
       <h1>My MindMap!</h1>
-      <div style = {nodeStyle}>
+      <div style={{ ...nodeStyle, fontSize: '24px' }}>
         {nodeLabel}
       </div>
       <br />
-      <button onClick = {toggleLabel}>
-        Toggle Button
-      </button>
+      <button onClick={toggleLabel}>Toggle Button</button>
       <p>Good job</p>
     </div>
   );
+  
 }
 
 export default App;
