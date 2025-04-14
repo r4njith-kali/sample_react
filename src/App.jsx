@@ -1,6 +1,6 @@
 // src/App.jsx
 import './App.css';
-import MindMapNode from './MindMapNode'; // Import the component
+import MindMapNode from './MindMapNode2'; // Import the component
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
       <MindMapNode />
       <MindMapNode />
       <MindMapNode />
-      
+
     </div>
   );
 }
