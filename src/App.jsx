@@ -2,6 +2,7 @@
 import './App.css';
 import MindMapNode from './MindMapNode'; // Import the component
 
+
 function App() {
   return (
     <div className="App">

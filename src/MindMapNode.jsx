@@ -1,5 +1,6 @@
 // src/MindMapNode.jsx
-import React from 'react'; // Import React (often optional now with Vite/modern setups, but good practice)
+import React, { useState } from 'react';
+
 
 // A simple functional component
 function MindMapNode() {
@@ -12,9 +13,19 @@ function MindMapNode() {
     display: 'inline-block',
   };
 
+  const [NodeLabel, setNodeLabel] = useState('True');
+
+  const toggleLabel = () => {
+    setNodeLabel((prevLabel) => 
+        prevLabel === 'True' ? 'False' : 'True'
+    );
+  };
+
   return (
-    <div style={nodeStyle}>
-      I am a Node!
+    <div>
+        <button style = {nodeStyle} onClick={toggleLabel}>
+            {NodeLabel}
+        </button>
     </div>
   );
 }
