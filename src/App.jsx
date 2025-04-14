@@ -1,29 +1,34 @@
-import './App.css';
 import React, { useState } from 'react';
 
 function App() {
-//  const nodeLabel = "Idea";
   const nodeStyle = {
-    border: '2px solid blue',
-    padding: '10px 20px',
-    borderRadius: '8px',
+    border: '3px solid blue',
+    padding: '10px 10px',
+    borderRadius: '10px',
     display: 'inline-block',
-    backgroundColor: 'lightblue'
+    backgroundColor: 'white',
+    margin: '10px'
   };
 
-  const [nodeLabel, setNodeLabel] = useState('Idea');
+  const [nodeLabel, setNodeLabel] = useState('True');
+
+  const toggleLabel = () => {
+    setNodeLabel((prevLabel) =>
+      prevLabel === 'True' ? 'False' : 'True'
+    );
+  };
 
   return (
     <div className = "App">
-      <h1>My MindMap</h1>
+      <h1>My MindMap!</h1>
       <div style = {nodeStyle}>
         {nodeLabel}
       </div>
       <br />
-      <button onClick={() => setNodeLabel("Updated Idea")}>
-        Rename
+      <button onClick = {toggleLabel}>
+        Toggle Button
       </button>
-      <p>Let's start building {2+2}</p>
+      <p>Good job</p>
     </div>
   );
 }
