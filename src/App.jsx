@@ -13,7 +13,7 @@ function App() {
   return (
     <div className = "App">
       <h1>My MindMap</h1>
-      <div className = {nodeStyle}>
+      <div style = {nodeStyle}>
         {nodeLabel}
       </div>
       <p>Let's start building {2+2}</p>
