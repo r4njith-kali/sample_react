@@ -8,14 +8,9 @@ function App() {
     <div className="App">
       <h1>My Mind Map</h1>
 
-      <MindMapNode />
-      <MindMapNode />
-      <MindMapNode />
-      <MindMapNode />
-      <MindMapNode />
-      <MindMapNode />
-      <MindMapNode />
-      <MindMapNode />
+      <MindMapNode label="Haha" color = "blue"/>
+      <MindMapNode label = "lol" color = "red"/>
+      <MindMapNode label = "branch2"/>
 
     </div>
   );
