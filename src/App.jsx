@@ -1,28 +1,24 @@
-//import React from 'react';
-
-import './App.css'
+import './App.css';
 
 function App() {
+  const nodeLabel = "Idea";
+  const nodeStyle = {
+    border: '2px solid blue',
+    padding: '10px 20px',
+    borderRadius: '8px',
+    display: 'inline-block',
+    backgroundColor: 'lightblue'
+  };
+
   return (
     <div className = "App">
-      <header>
-        <h1>Hi Dev!</h1>
-      </header>
-      <main> 
-        <h2>Hello! Select an option</h2> 
-        <select>
-          <option>A</option>
-          <option>B</option>
-          <option>C</option>
-          <option>D</option>
-          <input type = 'text' placeholder='Enter a text' />
-        </select>
-      </main>
-      <footer>
-        by ranjith
-      </footer>
+      <h1>My MindMap</h1>
+      <div className = {nodeStyle}>
+        {nodeLabel}
+      </div>
+      <p>Let's start building {2+2}</p>
     </div>
-  )
+  );
 }
 
 export default App;
