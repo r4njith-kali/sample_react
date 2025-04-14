@@ -7,9 +7,16 @@ function App() {
   return (
     <div className="App">
       <h1>My Mind Map</h1>
-      {/* Use the component like an HTML tag */}
+
       <MindMapNode />
-      <MindMapNode /> {/* You can reuse it easily */}
+      <MindMapNode />
+      <MindMapNode />
+      <MindMapNode />
+      <MindMapNode />
+      <MindMapNode />
+      <MindMapNode />
+      <MindMapNode />
+      
     </div>
   );
 }
