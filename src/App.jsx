@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import './App.css';
+import MindMapNode from './MindMapNode';
 
 function App() {
   return (
-    <div>
-      <h1>Hi!</h1>
+    <div className = "App">
+      <h1>My Mind Map</h1>
+      <MindMapNode />
+      <MindMapNode />
     </div>
   );
-  
-};
+}
 
 export default App;
