@@ -3,39 +3,57 @@ import React, { useState } from 'react';
 import MindMapNode from './MindMapNode2';
 
 function App() {
-    const ideas = ["React", "MindMap", "UI", "Design"];
-    const [nodes, setNodes] = useState([]);
-    const [nodeLabel, setNodeLabel] = useState("Show ideas");
+  const nodeStyle = {
+    border: '2px solid blue',
+    padding: '10px 10px',
+    borderRadius: '8px',
+    backgroundColor: 'lightblue',
+    margin: '10px',
+    display: 'inline-block'
+  };
 
-    const nodeStyle = {
-        border: '2px solid blue',
-        padding: '10px 10px',
-        borderRadius: '8px',
-        backgroundColor: 'lightblue',
-        margin: '10px',
-        display: 'inline-block'
-    };
+  const [newIdea, setNewIdea] = useState("");
+  const [ideas, setIdeas] = useState([]);
 
-    const handleClick = () => {
-        const generatedNodes = ideas.map((idea,index) => (
-            <div key={index} style={nodeStyle}>{idea}</div>
-        ));
-        setNodes(generatedNodes);
-        setNodeLabel("Ideas shown:");
-    };
+  return (
+    <div>
+      <input 
+        value={newIdea}
+        onChange={(e) => setNewIdea(e.target.value)}
+        placeholder="New Idea?"
+      />
 
-    return (
-        <div>
-            <h1>Hi</h1>
-            <button onClick={handleClick}>
-                {nodeLabel}
-            </button>
+      <button onClick={() => {
+        setIdeas([...ideas, newIdea]);
+        setNewIdea("");
+      }}>
+        Add Idea
+      </button>
 
-            <div style={{ marginTop: '20px' }}>
-                {nodes}
-            </div>
-        </div>
-    );
+      <div style={{ marginTop: '20px' }}>
+        {ideas.map((idea, index) => (
+          <div key={index} style={nodeStyle}>
+            {idea}
+          </div>
+        ))}
+      </div>
+
+      <div 
+        style={{
+          ...nodeStyle,
+          transition: 'all 0.25s ease-in-out',
+          backgroundColor: 'blue',
+          color: 'white',
+          cursor: 'pointer'
+        }}
+        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'darkblue'}
+        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'blue'}
+
+      >
+        Hover me!
+      </div>
+    </div>
+  );
 }
 
 export default App;
