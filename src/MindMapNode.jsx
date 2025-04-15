@@ -9,3 +9,5 @@ function MindMapNode({ idea, onDelete}) {
     </div>
   )
 }
+
+export default MindMapNode;

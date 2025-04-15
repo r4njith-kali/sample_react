@@ -4,7 +4,7 @@ import InputForm from './InputForm';
 import MindMapNode from './MindMapNode';
 
 function App() {
-    const [newIdea, setNewIdea] = ("");
+    const [newIdea, setNewIdea] = useState("");
     const [ideas, setIdeas] = useState([]);
 
     const addIdea = () => {
