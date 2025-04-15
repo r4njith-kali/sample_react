@@ -1,43 +1,44 @@
 import './App.css';
 import React, { useState } from 'react';
+import InputForm from './InputForm';
+import MindMapNode from './MindMapNode';
 
 function App() {
-    const [newIdea, setNewIdea] = useState("");
+    const [newIdea, setNewIdea] = ("");
     const [ideas, setIdeas] = useState([]);
+
+    const addIdea = () => {
+        if (newIdea.trim !== "") {
+            setIdeas([...ideas, newIdea]);
+            setNewIdea("");
+        }
+    };
+
+    const deleteIdea = (index) => {
+        const updated = [...ideas];
+        updated.splice(index,1);
+        setIdeas(updated);
+    };
 
     return (
         <div>
-            <input 
-                value = {newIdea}
-                onChange={(e) => setNewIdea(e.target.value)}
-                placeholder='New idea?'
+            <InputForm
+                newIdea={newIdea}
+                setNewIdea={setNewIdea}
+                addIdeas={addIdea}
             />
-
-            <button onClick={() => {
-                setIdeas([...ideas, newIdea]);
-                setNewIdea("");
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'pink'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'blue'}
-            >
-              Add idea
-            </button>
 
             <div>
                 {ideas.map((idea,index) => (
-                    <div key={index} className='mindmap_node'>
-                        {idea}
-                        <button className='delete_button' onClick={() => {
-                            const updated = [...ideas];
-                            updated.splice(index,1);
-                            setIdeas(updated);
-                        }}> X </button>
-                    </div>
-
+                    <MindMapNode
+                        key={index}
+                        idea={idea}
+                        onDelete={() => deleteIdea(index)}
+                    />
                 ))}
             </div>
         </div>
-    )
+    );
 }
 
 export default App;
