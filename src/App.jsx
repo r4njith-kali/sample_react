@@ -25,7 +25,7 @@ function App() {
             <InputForm
                 newIdea={newIdea}
                 setNewIdea={setNewIdea}
-                addIdeas={addIdea}
+                addIdea={addIdea}
             />
 
             <div>
