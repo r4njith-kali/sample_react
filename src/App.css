@@ -57,4 +57,19 @@
   background-color: lightcoral;
   display: inline-block;
   margin: 5px;
+  transition: all 0.25s ease-in-out;
+  color: blue;
+  cursor: pointer;
+}
+
+.delete_button {
+  border: 2px black;
+  padding: 3px 3px;
+  border-radius: 2px;
+  background-color: black;
+  display: 'inline-block';
+  margin: 5px;
+  transition: all 0.25s ease-in-out;
+  color: blue;
+  cursor: pointer;
 }
