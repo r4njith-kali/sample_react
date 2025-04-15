@@ -34,6 +34,12 @@ function App() {
         {ideas.map((idea, index) => (
           <div key={index} style={nodeStyle}>
             {idea}
+            <button onClick={() => {
+                const updated = [...ideas];
+                updated.splice(index,1);
+                setIdeas(updated);
+
+            }}> X </button>
           </div>
         ))}
       </div>
