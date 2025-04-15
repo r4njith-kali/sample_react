@@ -38,7 +38,7 @@ function App() {
         ))}
       </div>
 
-      <div 
+      <button onClick={() => setIdeas([])}
         style={{
           ...nodeStyle,
           transition: 'all 0.25s ease-in-out',
@@ -49,9 +49,7 @@ function App() {
         onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'darkblue'}
         onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'blue'}
 
-      >
-        Hover me!
-      </div>
+        >Reset MindMap</button>
     </div>
   );
 }
