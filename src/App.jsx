@@ -4,12 +4,18 @@ import MindMapNode from './MindMapNode2'
 
 function App() {
     const [nodeLabel, setNodeLabel] = useState('True');
+    const ideas = ["React", "Mind Maps", "AI", "Design"]
+
+
 
     return (
         <div>
             <h1>Hi</h1>
-            <button onClick= {() => setNodeLabel("Updated Idea")}>
-                Rename
+            <button onClick= {() => {ideas.map((idea,index) => (
+                <div key={index} style={nodeStyle}>{idea}</div>
+            )
+            )}}>
+                {nodeLabel}
             </button>
         </div>
     )
