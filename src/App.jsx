@@ -28,11 +28,25 @@ function App() {
   setNodes(prev => [...prev, newNode]);
   setLinks(prev => [...prev, newLink]);
   setIdea('');
-}
+
 
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       <h1>Force Mind Map</h1>
+
+      <input 
+        type="text"
+        value={idea}
+        onChange = {(e) => setIdea(e.target.value)}
+        placeholder = "Enter a new idea..."
+        style = { {padding: '8px', marginRight: '10px', wifth: '250px' }}
+      />
+
+      <button onClick={handleAddNode} style={{padding: '8px 12px'}}>
+        Add Node
+      </button>
+
+
       <ForceGraph nodes={nodes} links={links} />
     </div>
   );
