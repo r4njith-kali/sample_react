@@ -1,15 +1,15 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 
-const ForceGraph = ({ nodes, links }) => {
+const ForceGraph = ({ nodes, links, onNodeClick }) => {
   const svgRef = useRef();
 
   useEffect(() => {
     const svg = d3.select(svgRef.current);
-    svg.selectAll("*").remove(); // clear previous graph
+    svg.selectAll("*").remove(); // Clear previous graph
 
-    const width = 600;
-    const height = 400;
+    const width = 1200;
+    const height = 800;
 
     const simulation = d3.forceSimulation(nodes)
       .force("link", d3.forceLink(links).id(d => d.id).distance(100))
@@ -28,7 +28,10 @@ const ForceGraph = ({ nodes, links }) => {
       .join("circle")
       .attr("r", 15)
       .attr("fill", "skyblue")
-      .call(drag(simulation));
+      .call(drag(simulation))
+      .on("click", (event, d) => {
+        onNodeClick(d, event.pageX, event.pageY); // <- Pass node and position to parent
+      });
 
     const label = svg.append("g")
       .selectAll("text")
@@ -40,16 +43,10 @@ const ForceGraph = ({ nodes, links }) => {
       .attr("text-anchor", "middle");
 
     simulation.on("tick", () => {
-      node
-        .attr("cx", d => d.x)
-        .attr("cy", d => d.y);
-
+      node.attr("cx", d => d.x).attr("cy", d => d.y);
       link
-        .attr("x1", d => d.source.x)
-        .attr("y1", d => d.source.y)
-        .attr("x2", d => d.target.x)
-        .attr("y2", d => d.target.y);
-
+        .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+        .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
       label
         .attr("x", d => d.x)
         .attr("y", d => d.y);
@@ -73,7 +70,7 @@ const ForceGraph = ({ nodes, links }) => {
         });
     }
 
-  }, [nodes, links]);
+  }, [nodes, links, onNodeClick]);
 
   return <svg ref={svgRef} width={1200} height={800} />;
 };
