@@ -11,6 +11,7 @@ function App() {
     { id: '7', label: 'Branch f' },
     { id: '8', label: 'Branch g' },
     { id: '9', label: 'Branch h' }
+    { id: '10', label: 'Branch i'}
   ];
 
   const links = [
@@ -22,6 +23,7 @@ function App() {
     { source: '4', target: '7' },
     { source: '4', target: '8' },
     { source: '8', target: '9' },
+    { source: '9', target: '10'}
   ];
 
   return (
