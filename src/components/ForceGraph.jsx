@@ -1,48 +1,39 @@
 import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 
-const ForceGraph = ({ nodes, links, onNodeClick }) => {
+const ForceGraph = ({ nodes, links, depthMap, onNodeClick }) => {
   const svgRef = useRef();
 
   useEffect(() => {
+    const width = 2025;
+    const height = 1145;
+
     const svg = d3.select(svgRef.current);
-    svg.selectAll("*").remove();
+    svg.selectAll("*").remove(); // clean up old graph
 
-    const width = 1200;
-    const height = 800;
-
+    const getBlueShadeByDepth = (depth) => {
+      const hues = [200, 210, 220, 230, 240, 250]; // All bluish hues (HSB)
+      const hue = hues[depth % hues.length];      // Cycle or pick one
+      const saturation = 60 + Math.random() * 20;  // Stay vibrant
+      const lightness = 55 + Math.random() * 15;   // Vary brightness
+    
+      return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+    };
+    
     const simulation = d3.forceSimulation(nodes)
-      .force("link", d3.forceLink(links).id(d => d.id).distance(120))
+      .force("link", d3.forceLink(links).id(d => d.id).distance(150))
       .force("charge", d3.forceManyBody().strength(-300))
       .force("center", d3.forceCenter(width / 2, height / 2));
 
+    // Links
     const link = svg.append("g")
+      .attr("stroke", "#aaa")
       .selectAll("line")
       .data(links)
       .join("line")
-      .attr("stroke", "#ccc");
+      .attr("stroke-width", 2);
 
-    const node = svg.append("g")
-      .selectAll("circle")
-      .data(nodes)
-      .join("circle")
-      .attr("r", 20)
-      .attr("fill", "#87cefa")
-      .call(drag(simulation))
-      .on("click", (event, d) => {
-        event.stopPropagation();
-        onNodeClick(d, event.pageX, event.pageY);
-      });
-
-    const label = svg.append("g")
-      .selectAll("text")
-      .data(nodes)
-      .join("text")
-      .text(d => d.label)
-      .attr("font-size", 10)
-      .attr("dy", 4)
-      .attr("text-anchor", "middle");
-
+    // Node Groups (circle + text together)
     const nodeGroup = svg.append("g")
       .selectAll("g")
       .data(nodes)
@@ -54,18 +45,22 @@ const ForceGraph = ({ nodes, links, onNodeClick }) => {
         onNodeClick(d, event.pageX, event.pageY);
       });
 
-    // Add background circle
-    nodeGroup.append("circle")
-      .attr("r", d => 20 + d.label.length * 2) // dynamic radius
-      .attr("fill", "#6EC6FF");
+      nodeGroup.append("circle")
+      .attr("r", d => 30 + d.label.length * 2)
+      .attr("fill", d => {
+        const depth = depthMap[d.id] ?? 2;
+        return depth === 0 ? '#001F3F' : getBlueShadeByDepth(depth);
+      })      
+      .attr("stroke", "#222")
+      .attr("stroke-width", 1.5)
+      .style("filter", "drop-shadow(2px 2px 4px rgba(0,0,0,0.2))")
 
-    // Add wrapped text
+    // Add wrapped text inside bubble
     nodeGroup.append("text")
-      .text(d => d.label)
-      .attr("text-anchor", "middle")
-      .attr("dy", ".35em")
-      .style("font-size", "10px")
       .style("fill", "white")
+      .style("font-weight", d => d.id === 'root' ? '700' : '400')
+      .style("font-size", "12px")
+      .style("text-anchor", "middle")
       .style("pointer-events", "none")
       .each(function (d) {
         const words = d.label.split(" ");
@@ -81,27 +76,27 @@ const ForceGraph = ({ nodes, links, onNodeClick }) => {
         });
         lines.push(line);
 
-    const textEl = d3.select(this);
-      textEl.text(null);
-      lines.forEach((l, i) => {
-        textEl.append("tspan")
-          .text(l)
-          .attr("x", 0)
-          .attr("dy", i === 0 ? 0 : "1.2em");
+        const textEl = d3.select(this);
+        textEl.text(null);
+        lines.forEach((l, i) => {
+          textEl.append("tspan")
+            .text(l)
+            .attr("x", 0)
+            .attr("dy", i === 0 ? 0 : "1.2em");
+        });
       });
-    });
 
-
+    // Tick updates
     simulation.on("tick", () => {
-      node.attr("cx", d => d.x).attr("cy", d => d.y);
+      nodeGroup.attr("transform", d => `translate(${d.x}, ${d.y})`);
       link
-        .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
-        .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
-      label
-        .attr("x", d => d.x)
-        .attr("y", d => d.y);
+        .attr("x1", d => d.source.x)
+        .attr("y1", d => d.source.y)
+        .attr("x2", d => d.target.x)
+        .attr("y2", d => d.target.y);
     });
 
+    // Drag logic
     function drag(simulation) {
       return d3.drag()
         .on("start", event => {
@@ -121,7 +116,7 @@ const ForceGraph = ({ nodes, links, onNodeClick }) => {
     }
   }, [nodes, links, onNodeClick]);
 
-  return <svg ref={svgRef} width={1200} height={800} />;
+  return <svg ref={svgRef} width={2025} height={1145} />;
 };
 
 export default ForceGraph;
