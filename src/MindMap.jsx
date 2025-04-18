@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import ForceGraph from './component/ForceGraph';
+import ForceGraph from './components/ForceGraph';
 import { v4 as uuidv4 } from 'uuid';
 
 const MindMap = () => {
     const location = useLocation();
     const centralIdea = location.state?.centralIdea || 'Central Idea';
     
-    const [nodes, setNodes] = useState([{ id: 'root', label: centralIdea}]);
-    const [links, setLinks] = useState([]);
+    const [nodes, setNodes] = useState([
+        { id: 'root', label: centralIdea, fx: 600, fy: 400 },
+        { id: 'A', label: 'A' },
+        { id: 'B', label: 'B' },
+        { id: 'C', label: 'C' }
+      ]);
+      
+      const [links, setLinks] = useState([
+        { source: 'root', target: 'A' },
+        { source: 'root', target: 'B' },
+        { source: 'root', target: 'C' }
+      ]);
+      
     const [selectedNode, setSelectedNode] = useState(null);
     const [menuPos, setMenuPost] = useState({x:0,y:0});
 
