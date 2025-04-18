@@ -9,24 +9,60 @@ const MindMap = () => {
     const centralIdea = location.state?.centralIdea || 'Central Idea';
   
     const [nodes, setNodes] = useState([
-        { id: 'root', label: centralIdea, fx: 1013, fy: 573 }, // Layer 0 (central idea)
-        { id: 'A', label: 'Layer 1 - A' },                     // Layer 1
+        { id: 'root', label: 'Central Idea', fx: 1013, fy: 573 }, // Depth 0
+      
+        // Depth 1
+        { id: 'A', label: 'Layer 1 - A' },
         { id: 'B', label: 'Layer 1 - B' },
-        { id: 'C', label: 'Layer 1 - C' },
-        { id: 'D', label: 'Layer 2 - D' },                     // Layer 2
-        { id: 'E', label: 'Layer 2 - E' },
-        { id: 'F', label: 'Layer 3 - F' },                     // Layer 3
+      
+        // Depth 2
+        { id: 'C', label: 'Layer 2 - C' },
+        { id: 'D', label: 'Layer 2 - D' },
+      
+        // Depth 3
+        { id: 'E', label: 'Layer 3 - E' },
+        { id: 'F', label: 'Layer 3 - F' },
+      
+        // Depth 4
+        { id: 'G', label: 'Layer 4 - G' },
+        { id: 'H', label: 'Layer 4 - H' },
+      
+        // Depth 5
+        { id: 'I', label: 'Layer 5 - I' },
+        { id: 'J', label: 'Layer 5 - J' },
+      
+        // Depth 6
+        { id: 'K', label: 'Layer 6 - K' },
+        { id: 'L', label: 'Layer 6 - L' },
       ]);
       
   
       const [links, setLinks] = useState([
-        { source: 'root', target: 'A' },  // Layer 1
+        // Depth 1
+        { source: 'root', target: 'A' },
         { source: 'root', target: 'B' },
-        { source: 'root', target: 'C' },
-        { source: 'C', target: 'D' },     // Layer 2
+      
+        // Depth 2
+        { source: 'A', target: 'C' },
+        { source: 'B', target: 'D' },
+      
+        // Depth 3
         { source: 'C', target: 'E' },
-        { source: 'D', target: 'F' }      // Layer 3
+        { source: 'D', target: 'F' },
+      
+        // Depth 4
+        { source: 'E', target: 'G' },
+        { source: 'F', target: 'H' },
+      
+        // Depth 5
+        { source: 'G', target: 'I' },
+        { source: 'H', target: 'J' },
+      
+        // Depth 6
+        { source: 'I', target: 'K' },
+        { source: 'J', target: 'L' },
       ]);
+      
       
   
     const assignNodeDepths = (nodes, links) => {
