@@ -30,7 +30,7 @@ function App() {
 
   const handleNodeClick = (node, x, y) => {
     setSelectedNode(node);
-    setMenuPos({ x, y });
+    setMenuPos({ x , y  });
   };
 
   const handleDelete = () => {
